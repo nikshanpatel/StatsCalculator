@@ -12,6 +12,11 @@ class MyTestCase(unittest.TestCase):
         calc = Calculator()
         self.assertEqual(calc.result, 4)
 
+    def test_result_property_calc(self):
+        calc = Calculator()
+        self.assertEqual(calc.result, 4)
+        self.assertEqual(calc.add(2,2), 4)
+
 
 if __name__ == '__main__':
     unittest.main()
