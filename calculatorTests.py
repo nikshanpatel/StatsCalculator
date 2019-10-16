@@ -1,7 +1,9 @@
 import unittest
 from calculator import Calculator
 
+
 class MyTestCase(unittest.TestCase):
+
     def test_instantiate_calc(self):
         calc = Calculator
         self.assertIsInstance(calc, Calculator)
