@@ -1,4 +1,4 @@
-##Sample Mean: 
+**Sample Mean: **
 
 The mean of a sample is computed by adding all of the observations in the sample and dividing by the number of observations. 
 
