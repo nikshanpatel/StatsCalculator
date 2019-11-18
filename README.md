@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/nikshanpatel/StatsCalculator.svg?branch=master)](https://travis-ci.org/nikshanpatel/StatsCalculator)
-
-# StatsCalculator
+# StatsCalculator   - [![Build Status](https://travis-ci.org/nikshanpatel/StatsCalculator.svg?branch=master)](https://travis-ci.org/nikshanpatel/StatsCalculator)
 ### IS601 MiniProject #2 - Basic & Statistical Calculator
 
 > - **Nikshan Patel**
