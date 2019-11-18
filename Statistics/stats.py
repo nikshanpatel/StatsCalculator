@@ -89,7 +89,7 @@ def population_proportion(feature_x, population):
 
 
 if __name__ == '__main__':
-    data = [2, 4, 4, 4, 5, 5, 7, 9, 5, 3]
+    data = [42,86,51,77,20,96,71,40,57,42]
     data_sum = sum(data)
     data_mean = mean(data)
     data_median = median(data)

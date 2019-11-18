@@ -1,5 +1,5 @@
 Value1,Mean,Median,Mode,Sample_Size,Sample_Mean,Pop_Std_Dev,Sample_Std_Dev,Pop_Var,Sample_Var
-42,48.7,46,42,10,58.2,29.251,23.776,855.65,565.289
+42,48.7,46,42,10,58.2,29.251,22,855.65,508.760
 86,,,,,,,,,
 51,,,,,,,,,
 77,,,,,,,,,
