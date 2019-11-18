@@ -1,4 +1,4 @@
-FROM python:3
-COPY calculator.py .
-COPY calculatorTests.py .
-CMD ["python", "./calculatorTests.py"]
+FROM python:3.7
+ADD . .
+RUN pip install --upgrade pip
+CMD ["python", "-m", "unittest", "discover", "-s","Tests"]
