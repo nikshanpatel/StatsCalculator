@@ -11,7 +11,9 @@ class Statistics(Calculator):
     data = []
 
     def __init__(self, filepath):
-        self.data = CsvReader(filepath)
+        test_data = CsvReader(filepath).data
+        for row in test_data:
+            self.data.append(float(row['Value1']))
         super().__init__()
 
     def mean(self):

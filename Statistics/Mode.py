@@ -9,5 +9,5 @@ def mode(data):
     if len(mode) == n:
         get_mode = "No mode found"
     else:
-        get_mode = "Mode is / are: " + ', '.join(map(str, mode))
+        get_mode = "".join(map(str, mode))
     return get_mode
