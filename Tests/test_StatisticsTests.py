@@ -48,7 +48,7 @@ class MyTestCase(unittest.TestCase):
     def test_psd_statistics(self):
         test_data = CsvReader('Tests/Data/UnitTestStats.csv').data
         first_row = ([i for i in test_data if i['Pop_Std_Dev'] != ''])[0]
-        pop_std_dev = float(first_row['Pop_Var'])
+        pop_std_dev = float(first_row['Pop_Std_Dev'])
         self.assertEqual(self.statistics.mode(), str(pop_std_dev))
 
 
