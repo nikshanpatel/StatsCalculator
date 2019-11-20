@@ -53,9 +53,15 @@ class MyTestCase(unittest.TestCase):
 
     def test_pcc_statistics(self):
         test_data = CsvReader('Tests/Data/UnitTestStats.csv').data
-        first_row = ([i for i in test_data if i['Pop_Std_Dev'] != ''])[0]
+        first_row = ([i for i in test_data if i['Pop_Cor_Coef'] != ''])[0]
         pop_cor_coef = float(first_row['Pop_Cor_Coef'])
         self.assertEqual(self.statistics.pcc(), pop_cor_coef)
+
+    def test_zscore_statistics(self):
+        test_data = CsvReader('Tests/Data/UnitTestStats.csv').data
+        first_row = ([i for i in test_data if i['Z_Score'] != ''])[0]
+        z_score = float(first_row['Z_Score'])
+        self.assertEqual(self.statistics.z(), z_score)
 
 
 if __name__ == '__main__':

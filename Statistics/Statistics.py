@@ -53,5 +53,5 @@ class Statistics(Calculator):
         return self.result
 
     def z(self):
-        self.result = z_score(self.data, self.data)
+        self.result = z_score(self.data[0], self.data)
         return self.result
