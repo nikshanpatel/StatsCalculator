@@ -51,6 +51,12 @@ class MyTestCase(unittest.TestCase):
         pop_std_dev = float(first_row['Pop_Std_Dev'])
         self.assertEqual(self.statistics.psd(), pop_std_dev)
 
+    def test_pcc_statistics(self):
+        test_data = CsvReader('Tests/Data/UnitTestStats.csv').data
+        first_row = ([i for i in test_data if i['Pop_Std_Dev'] != ''])[0]
+        pop_cor_coef = float(first_row['Pop_Cor_Coef'])
+        self.assertEqual(self.statistics.pcc(), pop_cor_coef)
+
 
 if __name__ == '__main__':
     unittest.main()
