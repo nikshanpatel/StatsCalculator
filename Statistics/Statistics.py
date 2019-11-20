@@ -3,6 +3,10 @@ from Statistics.Mean import mean
 from Statistics.Median import median
 from Statistics.Mode import mode
 from Statistics.SampleMean import get_sample_mean
+from Statistics.PopulationStandardDeviation import standard_deviation
+from Statistics.PopulationCorrelationCoefficient import population_correlation_coefficient
+from Statistics.PopulationVariance import population_variance
+from Statistics.Standardized_or_Z_Score import z_score
 
 from CsvReader.CsvReader import CsvReader
 
@@ -31,4 +35,23 @@ class Statistics(Calculator):
 
     def mode(self):
         self.result = mode(self.data)
+        return self.result
+
+    # Population Correlation Coefficient
+    def pcc(self):
+        self.result = population_correlation_coefficient(self.data, self.data)
+        return self.result
+
+    # Population Standard Deviation
+    def psd(self):
+        self.result = standard_deviation(self)
+        return self.result
+
+    # Population Variance
+    def pv(self):
+        self.result = population_variance(self)
+        return self.result
+
+    def z(self):
+        self.result = z_score(self.data, self.data)
         return self.result

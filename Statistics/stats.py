@@ -1,5 +1,6 @@
 from collections import Counter
 
+
 def sum(data):
     total = 0
     for i in data:
@@ -52,7 +53,7 @@ def sqrt(x):
     while result <= x:
         sqrt_val += 1
         result = sqrt_val * sqrt_val
-    return sqrt_val -1
+    return sqrt_val - 1
 
 
 def deviation(value_1, mean_value):
@@ -86,6 +87,15 @@ def standard_deviation(data):
 def population_proportion(feature_x, population):
     data_x_prop = feature_x / population
     return data_x_prop
+
+
+def z_score(a):
+    z = (a - mean(a)) / len(a)
+    return z
+
+
+def variance_of_population_proportion(a):
+    variance(a, mean(a))
 
 
 if __name__ == '__main__':
