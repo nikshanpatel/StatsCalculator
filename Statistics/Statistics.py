@@ -44,12 +44,12 @@ class Statistics(Calculator):
 
     # Population Standard Deviation
     def psd(self):
-        self.result = standard_deviation(self)
+        self.result = standard_deviation(self.data)
         return self.result
 
     # Population Variance
     def pv(self):
-        self.result = population_variance(self)
+        self.result = population_variance(self.data)
         return self.result
 
     def z(self):
