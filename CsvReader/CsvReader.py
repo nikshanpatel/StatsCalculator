@@ -1,4 +1,5 @@
 import csv
+import sys
 from Fileutilities.absolutepath import absolutepath
 
 
@@ -12,11 +13,17 @@ class CsvReader:
     def __init__(self, filepath):
         self.data = []
 
-        with open(absolutepath(filepath)) as text_data:
-            csv_data = csv.DictReader(text_data, delimiter=',')
+        try:
+            file = open(absolutepath(filepath))
+        except OSError:
+            print("Could not open/read file:", filepath)
+            sys.exit()
+
+        with file:
+            csv_data = csv.DictReader(file, delimiter=',')
             for row in csv_data:
                 self.data.append(row)
-        pass
+
 
     def return_data_as_objects(self, class_name):
         objects = []
