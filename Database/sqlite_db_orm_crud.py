@@ -1,8 +1,9 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from sqlalchemy import create_engine, DateTime, Numeric, SmallInteger, distinct, func, cast, Date, distinct, union, text
+from sqlalchemy import create_engine, DateTime, Numeric, SmallInteger, update, func, cast, Date, distinct, union, text
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import IntegrityError
 from pprint import pprint
 from datetime import datetime
 
@@ -256,3 +257,29 @@ session.query(Customer).filter(text("town like 'Nor%'")).order_by(text("first_na
 
 #-------------------------------------------------
 
+def dispatch_order(order_id):
+    # check whether order_id is valid or not
+    order = session.query(Order).get(order_id)
+
+    if not order:
+        raise ValueError("Invalid order id: {}.".format(order_id))
+
+    if order.date_shipped:
+        print("Order already shipped.")
+        return
+
+    try:
+        for i in order.order_lines:
+            i.item.quantity = i.item.quantity - i.quantity
+
+        order.date_shipped = datetime.now()
+        session.commit()
+        print("Transaction completed.")
+
+    except IntegrityError as e:
+        print(e)
+        print("Rolling back ...")
+        session.rollback()
+        print("Transaction failed.")
+
+dispatch_order(1)
