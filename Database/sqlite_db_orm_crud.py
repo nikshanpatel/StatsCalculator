@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from sqlalchemy import create_engine, DateTime, Numeric, SmallInteger, distinct, func, cast, Date, distinct, union
+from sqlalchemy import create_engine, DateTime, Numeric, SmallInteger, distinct, func, cast, Date, distinct, union, text
 from sqlalchemy.orm import sessionmaker
 from pprint import pprint
 from datetime import datetime
@@ -247,6 +247,12 @@ session.query(Item).filter(
     Item.name.ilike("W%")
 ).delete(synchronize_session='fetch')
 session.commit()
+
+#-------------------------------------------------
+
+session.query(Customer).filter(text("first_name = 'John'")).all()
+session.query(Customer).filter(text("town like 'Nor%'")).all()
+session.query(Customer).filter(text("town like 'Nor%'")).order_by(text("first_name, id desc")).all()
 
 #-------------------------------------------------
 
