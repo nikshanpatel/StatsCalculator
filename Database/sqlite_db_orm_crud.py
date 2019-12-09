@@ -31,7 +31,7 @@ class Item(Base):
     name = Column(String(200), nullable=False)
     cost_price = Column(Numeric(10, 2), nullable=False)
     selling_price = Column(Numeric(10, 2), nullable=False)
-    quantity = Column(Integer(), nullable=False)
+    quantity = Column(SmallInteger())
     orders = relationship("Order", backref='customer')
 
 
@@ -177,10 +177,10 @@ session.query(Order).filter(Order.date_shipped != None).all()
 session.query(Customer).filter(Customer.first_name.in_(['Toby', 'Sarah'])).all()
 session.query(Customer).filter(Customer.first_name.notin_(['Toby', 'Sarah'])).all()
 session.query(Item).filter(Item.cost_price.between(10, 50)).all()
-session.query(Item).filter(not_(Item.cost_price.between(10, 50))).all()
+session.query(Item).filter((Item.cost_price.between(10, 50))).all()
 session.query(Item).filter(Item.name.like("%r")).all()
 session.query(Item).filter(Item.name.ilike("w%")).all()
-session.query(Item).filter(not_(Item.name.like("W%"))).all()
+session.query(Item).filter((Item.name.like("W%"))).all()
 session.query(Customer).limit(2).all()
 session.query(Customer).filter(Customer.address.ilike("%avenue")).limit(2).all()
 session.query(Customer).limit(2).offset(2).all()
@@ -283,3 +283,4 @@ def dispatch_order(order_id):
         print("Transaction failed.")
 
 dispatch_order(1)
+dispatch_order(2)
