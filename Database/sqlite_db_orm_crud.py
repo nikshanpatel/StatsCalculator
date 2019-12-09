@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from sqlalchemy import create_engine, DateTime, Numeric, SmallInteger
+from sqlalchemy import create_engine, DateTime, Numeric, SmallInteger, distinct
 from sqlalchemy.orm import sessionmaker
 from pprint import pprint
 from datetime import datetime
@@ -186,3 +186,19 @@ session.query(Customer).limit(2).offset(2).all()
 session.query(Customer).join(Order).all()
 
 print(session.query(Customer).join(Order))
+
+session.query(
+    Customer.first_name,
+    Item.name,
+    Item.selling_price,
+    OrderLine.quantity
+).join(Order).join(OrderLine).join(Item).filter(
+    Customer.first_name == 'John',
+    Customer.last_name == 'Green',
+    Order.id == 1,
+).all()
+
+session.query(
+    Customer.first_name,
+    Order.id,
+).outerjoin(Order).all()
