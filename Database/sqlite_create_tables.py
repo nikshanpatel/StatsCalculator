@@ -1,11 +1,12 @@
-from sqlalchemy import create_engine, MetaData, Table, Integer, String, \
-    Column, DateTime, ForeignKey, Numeric, SmallInteger
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from sqlalchemy import create_engine, DateTime, Numeric, SmallInteger
+from sqlalchemy.orm import sessionmaker
+from pprint import pprint
 from datetime import datetime
 
 engine = create_engine('sqlite:////web/Sqlite-Data/example.db')
-
 Base = declarative_base()
 
 
@@ -16,6 +17,8 @@ class Customer(Base):
     last_name = Column(String(100), nullable=False)
     username = Column(String(50), nullable=False)
     email = Column(String(200), nullable=False)
+    address = Column(String(200), nullable=False)
+    town = Column(String(50), nullable=False)
     created_on = Column(DateTime(), default=datetime.now)
     updated_on = Column(DateTime(), default=datetime.now, onupdate=datetime.now)
     orders = relationship("Order", backref='customer')
@@ -27,8 +30,6 @@ class Item(Base):
     name = Column(String(200), nullable=False)
     cost_price = Column(Numeric(10, 2), nullable=False)
     selling_price = Column(Numeric(10, 2), nullable=False)
-
-
 #     orders = relationship("Order", backref='customer')
 
 
@@ -49,4 +50,28 @@ class OrderLine(Base):
     item = relationship("Item")
 
 
+Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
+
+
+c1 = Customer(first_name='Toby',
+              last_name='Miller',
+              username='tmiller',
+              email='tmiller@example.com',
+              address='1662 Kinney Street',
+              town='Wolfden')
+
+c2 = Customer(first_name='Scott',
+              last_name='Harvey',
+              username='scottharvey',
+              email='scottharvey@example.com',
+              address='424 Patterson Street',
+              town='Beckinsdale')
+
+session.add(c1)
+session.add(c2)
+#session.add_all([c1, c2])
+session.commit()
