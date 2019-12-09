@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from sqlalchemy import create_engine, DateTime, Numeric, SmallInteger, distinct
+from sqlalchemy import create_engine, DateTime, Numeric, SmallInteger, distinct, func
 from sqlalchemy.orm import sessionmaker
 from pprint import pprint
 from datetime import datetime
@@ -202,3 +202,13 @@ session.query(
     Customer.first_name,
     Order.id,
 ).outerjoin(Order).all()
+
+
+session.query(Customer.town).filter(Customer.id < 10).all()
+session.query(Customer.town).filter(Customer.id < 10).distinct().all()
+
+session.query(
+    func.count(distinct(Customer.town)),
+    func.count(Customer.town)
+).all()
+
